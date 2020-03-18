@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>hw200318</title>
+<script src="../js/jquery-3.4.1.js"></script>
+<style type="text/css">
+section {
+	background-color: #e6e6e6;
+	text-align: center;
+}
+
+section img {
+	width: 70%;
+	height: 70%;
+}
+
+nav img {
+	width: 20%;
+	height: 20%;
+	opacity: 0.5;
+	border: 0px solid gray;
+}
+
+nav li {
+	display: inline;
+}
+
+h1 {
+	display: inline;
+}
+</style>
+</head>
+
+<body>
+	<div>
+		<section>
+			<input type="button" id="random_button" value="랜덤 선택" /><br>
+			<h1>오늘의 메뉴 :</h1>
+			<h1 id="selectedMenu">케이크</h1>
+			<br> <img id="selectedMenuImg" src="cake.jpg" />
+
+			<nav>
+				<ul>
+					<li id="Cake"><img id="menuCake" src="cake.jpg" /></li>
+					<li id="Burger"><img id="menuBurger" src="burger.jpg" /></li>
+					<li id="Steak"><img id="menuSteak" src="steak.jpg" /></li>
+					<li id="Sand"><img id="menuSand" src="sandwich.jpg" /></li>
+				</ul>
+			</nav>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		var selectedMenuNum = 0;
+		var selectedMenuName = 'menuCake';
+		document.getElementById(selectedMenuName).style.opacity = '1';
+		document.getElementById(selectedMenuName).style.border = '5px solid gray';
+
+		$("#random_button").click(function() {
+			var num = Math.floor(Math.random() * 4);
+			select(num);
+		});
+
+		$("#Cake").mouseover(function() {
+			overMouse('menuCake')
+		});
+		$("#Cake").mouseout(function() {
+			outMouse('menuCake')
+		});
+		$("#Cake").click(function() {
+			select(0)
+		});
+
+		$("#Burger").mouseover(function() {
+			overMouse('menuBurger')
+		});
+		$("#Burger").mouseout(function() {
+			outMouse('menuBurger')
+		});
+		$("#Burger").click(function() {
+			select(1)
+		});
+
+		$("#Steak").mouseover(function() {
+			overMouse('menuSteak')
+		});
+		$("#Steak").mouseout(function() {
+			outMouse('menuSteak')
+		});
+		$("#Steak").click(function() {
+			select(2)
+		});
+
+		$("#Sand").mouseover(function() {
+			overMouse('menuSand')
+		});
+		$("#Sand").mouseout(function() {
+			outMouse('menuSand')
+		});
+		$("#Sand").click(function() {
+			select(3)
+		});
+
+		function overMouse(name) {
+			document.getElementById(name).style.opacity = '1';
+		}
+
+		function outMouse(name) {
+			if (selectedMenuName != name) {
+				document.getElementById(name).style.opacity = '0.5';
+				document.getElementById(name).style.border = '0px solid gray';
+			}
+		}
+
+		function select(num) {
+			var nSrc, nText, nName;
+			if (num == "0") {
+				nSrc = 'cake.jpg';
+				nText = '케이크';
+				nName = 'menuCake';
+			} else if (num == "1") {
+				nSrc = 'burger.jpg';
+				nText = '햄버거';
+				nName = 'menuBurger';
+			} else if (num == "2") {
+				nSrc = 'steak.jpg';
+				nText = '스테이크';
+				nName = 'menuSteak';
+			} else {
+				nSrc = 'sandwich.jpg';
+				nText = '샌드위치';
+				nName = 'menuSand';
+			}
+			document.getElementById('selectedMenuImg').src = nSrc;
+			document.getElementById('selectedMenu').innerText = nText;
+			document.getElementById(nName).style.opacity = '1';
+			document.getElementById(nName).style.border = '5px solid gray';
+
+			document.getElementById(selectedMenuName).style.opacity = '0.5';
+			document.getElementById(selectedMenuName).style.border = '0px solid gray';
+			selectedMenuNum = num;
+			selectedMenuName = nName;
+		}
+	</script>
+</body>
+</html>
