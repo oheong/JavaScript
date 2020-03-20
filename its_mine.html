@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	/*css*/
+	#wrap{ /*가운데 정렬 id*/
+		padding : 30px;
+		text-align : center;
+		background-color : lightgray;
+	}
+	.INLINE{ /*인라인 클래스*/
+		display : inline-block;
+	}
+	.SIZECLASS{		
+		margin-left : 25px;
+		margin-right : 25px;
+		margin-top : 100px;
+		
+		width : 130px;
+		height : 100px;
+	}
+	#cake{
+		opacity : 1;
+		border : 5px solid red;
+	}
+	#burger, #steak, #sandwich{
+		opacity : 50%;
+	}
+</style>
+<script>
+	/*동작 구현*/
+	var menu=["케이크","햄버거","스테이크","샌드위치"	];
+	var eng_menu=["cake","burger","steak","sandwich"];
+	var clicked_num = 0;
+	
+	function select_menu(){
+		var num = Math.floor(Math.random()*4);
+		document.getElementById("menu_name").innerText = menu[num];
+		var eng_name = eng_menu[num]+".jpg";
+		document.getElementById("what_menu").src = eng_name;	
+
+	}
+	function pic_click(name){
+		var temp_name = document.getElementById(name.getAttribute('id')).getAttribute('id');
+		for(var i = 0; i < 4; i++){
+			document.getElementById(eng_menu[i]).style.border = "0px";
+			document.getElementById(eng_menu[i]).style.opacity = 0.5;
+			if(eng_menu[i] == temp_name){
+				clicked_num = i;
+				document.getElementById(temp_name).style.opacity = 1;
+				document.getElementById(temp_name).style.border = "5px solid red";
+			}
+		}
+		document.getElementById("menu_name").innerText = menu[clicked_num];
+		var eng_name = eng_menu[clicked_num]+".jpg";
+		document.getElementById("what_menu").src = eng_name;
+	}
+	function mouse_over(name){
+		var temp_name = document.getElementById(name.getAttribute('id')).getAttribute('id');
+		for(var i = 0; i < 4; i++){
+			document.getElementById(eng_menu[i]).style.opacity = 0.5;
+		}
+		document.getElementById(temp_name).style.opacity = 1;
+	}
+	function mouse_out(name){
+		var temp_name = document.getElementById(name.getAttribute('id')).getAttribute('id');
+		document.getElementById(eng_menu[clicked_num]).style.opacity = 1;
+		document.getElementById(temp_name).style.opacity = 0.5;
+		console.log(name);
+	}
+</script>
+</head>
+<body>
+	<div id = "wrap">
+		<div>
+			<input type="button" id="bnt" value="랜덤 메뉴" onclick="select_menu()"/>
+		</div>
+		<div>
+			<h1 class="INLINE">오늘의 메뉴 : </h1>
+			<h1 id="menu_name"  class="INLINE">케이크</h1>
+		</div>
+		<input type="image" id = "what_menu" src="cake.jpg"
+				height = "300px" width="400px" />
+		<div id="what_menu">
+			<input id ="cake" type="image" src="cake.jpg" class = "SIZECLASS"
+				onclick = "pic_click(cake)"
+				onmouseover = "mouse_over(cake)" 
+				onmouseout = "mouse_out(cake)">
+			<input id ="burger" type="image" src="burger.jpg" class = "SIZECLASS"
+				onclick = "pic_click(burger)" 
+				onmouseover = "mouse_over(burger)" 
+				onmouseout = "mouse_out(burger)">
+			<input id ="steak" type="image" src="steak.jpg" class = "SIZECLASS"
+				onclick = "pic_click(steak)" 
+				onmouseover = "mouse_over(steak)" 
+				onmouseout = "mouse_out(steak)">
+			<input id ="sandwich" type="image" src="sandwich.jpg" class = "SIZECLASS"
+				onclick = "pic_click(sandwich)" 
+				onmouseover = "mouse_over(sandwich)" 
+				onmouseout = "mouse_out(sandwich)">
+		</div>
+	</div>
+</body>
+</html>
